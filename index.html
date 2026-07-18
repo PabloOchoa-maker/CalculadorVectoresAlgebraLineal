@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora de Vectores — Álgebra Lineal</title>
+  </head>
+  <body>
+    <main class="app">
+      <header class="cabecera">
+        <h1>Calculadora de Vectores</h1>
+        <p class="subtitulo">
+          Ingresa los vectores en el sistema que prefieras. Se convierten a
+          rectangular para calcular y el resultado se muestra en todos los estilos.
+        </p>
+      </header>
+
+      <nav class="pestanas" role="tablist" aria-label="Dimensión">
+        <button
+          class="pestana pestana--activa"
+          role="tab"
+          id="tab-2d"
+          aria-controls="panel-2d"
+          aria-selected="true"
+          data-panel="panel-2d"
+        >
+          Vectores 2D
+        </button>
+        <button
+          class="pestana"
+          role="tab"
+          id="tab-3d"
+          aria-controls="panel-3d"
+          aria-selected="false"
+          data-panel="panel-3d"
+        >
+          Vectores 3D
+        </button>
+      </nav>
+
+      <section id="panel-2d" class="panel" role="tabpanel" aria-labelledby="tab-2d"></section>
+      <section id="panel-3d" class="panel panel--oculto" role="tabpanel" aria-labelledby="tab-3d" hidden></section>
+    </main>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

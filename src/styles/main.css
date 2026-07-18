@@ -1,0 +1,261 @@
+:root {
+  --bg: #0f1220;
+  --superficie: #191d33;
+  --superficie-alta: #232945;
+  --borde: #2f3757;
+  --texto: #e8eaf6;
+  --texto-tenue: #9aa2c7;
+  --acento: #6c8cff;
+  --acento-suave: #2a3566;
+  --ok: #4ade80;
+  --radio: 10px;
+  --fuente-mono: ui-monospace, "Cascadia Code", "Fira Code", Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--texto);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.55;
+}
+
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+/* Cabecera */
+.cabecera h1 {
+  margin: 0 0 0.35rem;
+  font-size: 1.75rem;
+  letter-spacing: -0.02em;
+}
+
+.subtitulo {
+  margin: 0;
+  color: var(--texto-tenue);
+  font-size: 0.95rem;
+  max-width: 60ch;
+}
+
+/* Pestañas */
+.pestanas {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1.75rem 0 1.25rem;
+  border-bottom: 1px solid var(--borde);
+}
+
+.pestana {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--texto-tenue);
+  font: inherit;
+  font-weight: 500;
+  padding: 0.6rem 0.9rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.pestana:hover {
+  color: var(--texto);
+}
+
+.pestana--activa {
+  color: var(--acento);
+  border-bottom-color: var(--acento);
+}
+
+.pestana:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
+  border-radius: 4px 4px 0 0;
+}
+
+.panel--oculto {
+  display: none;
+}
+
+/* Entradas */
+.entradas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.vector-input {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 1rem 1.1rem 1.15rem;
+  margin: 0;
+}
+
+.vector-input legend {
+  padding: 0 0.4rem;
+  font-weight: 600;
+  color: var(--acento);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.campo--sistema {
+  margin-bottom: 0.85rem;
+}
+
+.campo label {
+  font-size: 0.78rem;
+  color: var(--texto-tenue);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+  gap: 0.6rem;
+}
+
+select,
+input[type='number'] {
+  background: var(--superficie-alta);
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  color: var(--texto);
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.45rem 0.55rem;
+  width: 100%;
+}
+
+input[type='number'] {
+  font-family: var(--fuente-mono);
+}
+
+select:focus,
+input[type='number']:focus {
+  outline: 2px solid var(--acento);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+/* Salida */
+.salida {
+  margin-top: 1.75rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.bloque {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 1rem 1.15rem 1.2rem;
+}
+
+.bloque h3 {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--texto-tenue);
+}
+
+.tabla-estilos {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--fuente-mono);
+  font-size: 0.88rem;
+}
+
+.tabla-estilos th,
+.tabla-estilos td {
+  text-align: left;
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid var(--borde);
+}
+
+.tabla-estilos thead th {
+  font-family: system-ui, sans-serif;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--texto-tenue);
+  font-weight: 600;
+}
+
+.tabla-estilos tbody th {
+  color: var(--acento);
+  width: 2.5rem;
+}
+
+.tabla-estilos tbody tr:last-child th,
+.tabla-estilos tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.escalar {
+  margin: 0;
+  font-family: var(--fuente-mono);
+  font-size: 1.15rem;
+}
+
+.escalar strong {
+  color: var(--ok);
+}
+
+.estilos {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.45rem 1rem;
+  margin: 0;
+  font-family: var(--fuente-mono);
+  font-size: 0.9rem;
+}
+
+.estilos dt {
+  color: var(--texto-tenue);
+  font-family: system-ui, sans-serif;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-top: 0.1rem;
+}
+
+.estilos dd {
+  margin: 0;
+}
+
+.nota {
+  margin: 0.85rem 0 0;
+  font-size: 0.83rem;
+  color: var(--texto-tenue);
+  max-width: 65ch;
+}
+
+.nota--destacada {
+  margin: 0 0 0.9rem;
+  background: var(--acento-suave);
+  border-left: 3px solid var(--acento);
+  border-radius: 0 6px 6px 0;
+  padding: 0.6rem 0.8rem;
+  color: var(--texto);
+}
+
+/* Tablas anchas nunca desbordan la página */
+@media (max-width: 560px) {
+  .bloque {
+    overflow-x: auto;
+  }
+}
