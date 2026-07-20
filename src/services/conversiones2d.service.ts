@@ -1,16 +1,9 @@
 import { Vector2D } from '../models/vector2d';
 import type { Entrada2D, Polar } from '../models/coordenadas';
+import { aRadianes, aGrados } from './angulos.service';
 
 /** Por debajo de esta magnitud un vector se considera nulo (evita ángulos con ruido). */
 const EPSILON = 1e-10;
-
-export function aRadianes(grados: number): number {
-  return (grados * Math.PI) / 180;
-}
-
-export function aGrados(radianes: number): number {
-  return (radianes * 180) / Math.PI;
-}
 
 /**
  * Conversiones de vectores del plano.

@@ -1,6 +1,6 @@
 import { Vector3D } from '../models/vector3d';
 import type { Entrada3D, Cilindrica } from '../models/coordenadas';
-import { aRadianes, aGrados } from './conversiones2d.service';
+import { aRadianes, aGrados } from './angulos.service';
 
 /** Por debajo de este radio el ángulo cilíndrico es indefinido. */
 const EPSILON = 1e-10;
