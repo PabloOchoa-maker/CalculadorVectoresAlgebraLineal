@@ -18,8 +18,9 @@ export class Conversiones2DService {
   }
 
   /**
-   * Ángulo en grados, normalizado a 0–360. De Conversiones.angulo().
-   * atan2 devuelve -180..180; le sumamos 360 a los negativos.
+   * Ángulo polar en grados, normalizado a 0–360. De Conversiones.angulo().
+   * Medido desde el Este (+X) en sentido antihorario. atan2 devuelve
+   * -180..180; le sumamos 360 a los negativos.
    */
   angulo(v: Vector2D): number {
     const a = aGrados(Math.atan2(v.y, v.x));
@@ -27,15 +28,32 @@ export class Conversiones2DService {
   }
 
   /**
+   * Ángulo geográfico (acimut/rumbo) en grados, normalizado a 0–360.
+   * Medido desde el Norte (+Y) en sentido horario: 0°=N, 90°=E, 180°=S, 270°=O.
+   * Es el mismo atan2 que el polar pero con x e y intercambiados, que es lo
+   * que refleja la referencia distinta (desde el Norte, no desde el Este).
+   */
+  anguloGeografico(v: Vector2D): number {
+    const a = aGrados(Math.atan2(v.x, v.y));
+    return a < 0 ? a + 360 : a;
+  }
+
+  /**
    * Lleva cualquier entrada a rectangular, que es el único sistema
-   * en el que se calcula. Polar y geográfica comparten fórmula porque
-   * se definieron idénticas (Este = 0°, antihorario).
+   * en el que se calcula. Polar mide θ desde el Este antihorario;
+   * geográfica mide θ desde el Norte en sentido horario, así que sus
+   * fórmulas de conversión no son iguales.
    */
   aRectangular(e: Entrada2D): Vector2D {
     if (e.sistema === 'rectangular') {
       return new Vector2D(e.a, e.b);
     }
     const rad = aRadianes(e.b);
+    if (e.sistema === 'geografica') {
+      // Acimut desde el Norte, horario: x = r·sin(θ), y = r·cos(θ).
+      return new Vector2D(e.a * Math.sin(rad), e.a * Math.cos(rad));
+    }
+    // Polar desde el Este, antihorario: x = r·cos(θ), y = r·sin(θ).
     return new Vector2D(e.a * Math.cos(rad), e.a * Math.sin(rad));
   }
 
@@ -44,8 +62,9 @@ export class Conversiones2DService {
     return { r, theta: r < EPSILON ? 0 : this.angulo(v) };
   }
 
-  /** Geográfica es idéntica a polar por decisión de diseño. */
+  /** Geográfica real: acimut desde el Norte, horario. Ya no es igual a polar. */
   aGeografica(v: Vector2D): Polar {
-    return this.aPolar(v);
+    const r = this.magnitud(v);
+    return { r, theta: r < EPSILON ? 0 : this.anguloGeografico(v) };
   }
 }
